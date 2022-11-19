@@ -78,7 +78,7 @@ def main
       add_value = large_distance_recommended.include?(key.to_s) ? good_match : bad_match
       set_value!(transport, key, add_value)
     else
-      add_value = !large_distance_recommended.include?(key.to_s) ? good_match : bad_match
+      add_value = bad_match
       set_value!(transport, key, add_value)
     end
   end
@@ -129,7 +129,7 @@ def main
     return
   end
 
-  dangers_text = "Перечисліть всі протипокази через кому:
+  dangers_text = "Перечисліть всі протипоказання через кому:
 1 боязнь висоти
 2 морська хвороба
 3 укачування
@@ -175,7 +175,7 @@ def main
   transport.each_key do |key|
     curr_speed_rate = speed_rate[key]
     is_good_match = curr_speed_rate >= data[:speed_rate]
-    is_bad_match = data[:speed_rate] - curr_speed_rate < 3
+    is_bad_match = data[:speed_rate] - curr_speed_rate <= 2
 
     to_add = if is_good_match
       good_match
