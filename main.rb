@@ -70,8 +70,8 @@ def main
 
   transport.each_key do |key|
     if is_distance_small
-      small_distance_disable.each do |key|
-        transport.delete(key)
+      small_distance_disable.each do |small_distance|
+        transport.delete(small_distance)
         # transport[key] = nil
       end
     elsif is_distance_large
