@@ -62,7 +62,7 @@ def main
 
   # check distance
   large_distance_recommended = ['plain', 'train', 'ship']
-  small_distance_disable = ['plain']
+  small_distance_disable = ['plain', 'train']
 
   data[:distance] = (get_user_input 'Відстань у км: ').to_i
   is_distance_large = data[:distance] >= 500
