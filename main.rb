@@ -61,17 +61,24 @@ def main
   end
 
   # check distance
-  large_distance = ['plain', 'train', 'ship']
+  large_distance_recommended = ['plain', 'train', 'ship']
+  small_distance_disable = ['plain']
 
   data[:distance] = (get_user_input 'Відстань у км: ').to_i
   is_distance_large = data[:distance] >= 500
+  is_distance_small = data[:distance] < 100
 
   transport.each_key do |key|
-    if is_distance_large
-      add_value = large_distance.include?(key.to_s) ? good_match : bad_match
+    if is_distance_small
+      small_distance_disable.each do |key|
+        transport.delete(key)
+        # transport[key] = nil
+      end
+    elsif is_distance_large
+      add_value = large_distance_recommended.include?(key.to_s) ? good_match : bad_match
       set_value!(transport, key, add_value)
     else
-      add_value = !large_distance.include?(key.to_s) ? good_match : bad_match
+      add_value = !large_distance_recommended.include?(key.to_s) ? good_match : bad_match
       set_value!(transport, key, add_value)
     end
   end
@@ -153,7 +160,6 @@ def main
   unless has_any
     return
   end
-
 
   # check speed
   speed_rate = {
